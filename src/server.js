@@ -1,15 +1,18 @@
 import express from "express";
-import configViewEngine from "./configs/viewEngine";
-import initWebRouter from "./routes/web";
-require("dotenv").config();
+import initWebRoutes from "./router/web";
+import confiViewEngine from "./configs/viewEngine";
+import bodyParser from "body-parser";
 
- const app = express();
- const PORT = process.env.PORT;
+const app = express();
+const PORT = process.env.PORT || 8080;
+confiViewEngine(app);
 
- configViewEngine(app);
+//config body parser chuyen data thanh dang json obj
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
- initWebRouter(app);
+initWebRoutes(app);
 
- app.listen(PORT, () =>{
-    console.log(">>> jwt backend is running = "+PORT);
- })
+app.listen(PORT, () => {
+    console.log("jwt backend is running on the port =" + PORT);
+})
