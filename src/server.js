@@ -2,7 +2,7 @@ import express from "express";
 import initWebRoutes from "./router/web";
 import confiViewEngine from "./config/viewEngine";
 import bodyParser from "body-parser";
-import connnection from "./config/connectDB";
+// import connnection from "./config/connectDB";
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -13,7 +13,7 @@ confiViewEngine(app);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-connnection();
+// connnection();
 initWebRoutes(app);
 
 app.listen(PORT, () => {
