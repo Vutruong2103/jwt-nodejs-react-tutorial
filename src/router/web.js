@@ -12,7 +12,9 @@ const initWebRouter = (app) => {
     router.get("/", homeController.handleHelloWord);
     router.get("/user", homeController.handlUserPage);
     router.post("/users/create-user", homeController.handlCreateNewUser)
-
+    router.post('/delete-user/:id', homeController.handleDeleteUser)
+    router.get('/update-user/:id', homeController.getUpdateUserPage)
+    router.post("/user/update-user", homeController.handleUpdateUser)
     //file chạy ra đầu tiên
     return app.use("/", router);
 
