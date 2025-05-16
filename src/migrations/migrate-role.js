@@ -1,20 +1,17 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Role', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      email: {
+      url: {
         type: Sequelize.STRING
       },
-      password: {
-        type: Sequelize.STRING
-      },
-      username: {
+      description: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -28,7 +25,8 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('Role');
   }
 };
-//quy dinh chi tiet trong database, tao table Users ntn thi no chay vao day
+//file nay de tao table trong database
+//quy dinh chi tiet trong database, tao table Role ntn thi no chay vao day

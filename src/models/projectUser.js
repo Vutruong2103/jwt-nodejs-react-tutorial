@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Project_User extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -15,15 +15,14 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   //obj relatinal mapping
-  User.init({
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    username: DataTypes.STRING
+  Project_User.init({
+    projectId: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'Project_User',
   });
-  return User;
+  return Project_User;
 };
 
 //models dinh nghia table no ntn, models ánh xạ tới miggrations 

@@ -30,10 +30,11 @@ const getUpdateUserPage = async (req, res) => {
     let user = await userService.getUserById(id);
     //Tạo một biến userData rỗng để chứa dữ liệu người dùng sau khi kiểm tra.
     let userData = {};
-    if (user && user.length > 0) {
-        //gán userData = user[0], tức là lấy người dùng đầu tiên trong danh sách (vì có thể kết quả là một mảng) 
-        userData = user[0];
-    }
+    userData = user;
+    // if (user && user.length > 0) {
+    //     //gán userData = user[0], tức là lấy người dùng đầu tiên trong danh sách (vì có thể kết quả là một mảng) 
+    //     userData = user[0];
+    // }
     //Dùng res.render(...) để render file user-update.ejs và truyền đối tượng userData vào EJS
     return res.render('user-update.ejs', { userData })
 }

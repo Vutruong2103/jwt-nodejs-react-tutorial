@@ -17,7 +17,8 @@ const initWebRouter = (app) => {
     router.post("/user/update-user", homeController.handleUpdateUser)
     //file chạy ra đầu tiên
     return app.use("/", router);
-
+    //rest api
+    //GET-R, POST-C, PUT-U, DELETE-D
 }
 
 export default initWebRouter;

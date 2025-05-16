@@ -8,7 +8,7 @@ module.exports = {
      * Example:
      
     */
-   //cac ptu chen vao databate, bulkInsert chen nhieu du lieu vao database cung 1 luc, tham chieu toi models User chen vao databese
+    //cac ptu chen vao databate, bulkInsert chen nhieu du lieu vao database cung 1 luc, tham chieu toi models User chen vao databese
     await queryInterface.bulkInsert('Users', [{
       email: 'John Doe',
       password: '',
