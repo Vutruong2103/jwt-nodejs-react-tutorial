@@ -122,7 +122,7 @@ const handleUserLogin = async (rawData) => {//rawData du lieu ban dau nguoi dung
 }
 
 module.exports = {
-    registerNewUser, handleUserLogin
+    registerNewUser, handleUserLogin, hashUserPassWord, checkEmailExist, checkPhoneExist
 }
 
 //khi thao tac voi sequelize thi dung sequelize obj vd: cap nhat, xoa nguoi dung

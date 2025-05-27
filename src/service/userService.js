@@ -82,7 +82,7 @@ const getUserById = async (id) => {
         where: { id: id }
     })
     //chuyen sang model obj co nhieu thong tin hon, kh nen chuyen qua obj js vi se thanh bien cua js
-    return user.get({ plain: true });
+    return user.get({ plain: true });//tra ra obj cua js
     // const connection = await mysql.createConnection({
     //     host: 'localhost',
     //     user: 'root',
