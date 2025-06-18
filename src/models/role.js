@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Role.belongsToMany(models.Group, {through: 'Group_Role'});
+      Role.belongsToMany(models.Group, { through: 'Group_Role' });
     }
   };
 
@@ -22,6 +22,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Role',
+    tableName: 'Role',
+    freezeTableName: true
   });
   return Role;
 };

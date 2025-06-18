@@ -1,8 +1,10 @@
 //xử lý chính
+require('dotenv').config();
 import db from '../models/index';
 import bcrypt from 'bcryptjs';
 import { Op } from 'sequelize';
-
+import { getGroupWithRoles } from './JWTService';
+import { createJWT } from '../middleware/JWTAction'
 
 
 const salt = bcrypt.genSaltSync(10);
@@ -58,7 +60,8 @@ const registerNewUser = async (rawUserData) => {//rawUserData là một tham s�
             email: rawUserData.email,
             username: rawUserData.username,
             password: hashPass,
-            phone: rawUserData.phone
+            phone: rawUserData.phone,
+            groupId: 4
         })
         //truong hop kh loi
         return {
@@ -82,6 +85,7 @@ const checkPassword = (inputPassword, hasPassword) => {
 //Kiểm tra thông tin đăng nhập người dùng
 const handleUserLogin = async (rawData) => {//rawData du lieu ban dau nguoi dung nhap vao
     //tìm user db
+    console.log("rawData: ", rawData)
     try {
         let user = await db.User.findOne({
             where: {
@@ -98,10 +102,27 @@ const handleUserLogin = async (rawData) => {//rawData du lieu ban dau nguoi dung
             let isCorrectPassword = checkPassword(rawData.password, user.password);//user.password lay tu db leen
             // Nếu khớp, trả về kết quả thành công
             if (isCorrectPassword === true) {
+                //let token
+
+                //test roles
+                let groupWithRoles = await getGroupWithRoles(user);
+                console.log('groupWithRoles: ', groupWithRoles)
+                let payload = {
+                    email: user.email,
+                    groupWithRoles,
+                    expiresIn: process.env.JWT_EXPIRES_IN //60milisecon
+                }
+                let token = createJWT(payload);
+                // anh đang đoán mấy cái EM, EC, DT như này => anh cũng lạy 
+                // mà trong khi chỗ này là thành công, thì phải là SC: success message, mà trên đời chẳng th khùng nào viết vậy
+                // chỉ đơn giản là: message: "OK", nếu lỗi: message: "ERROR"
                 return {
-                    EM: 'ok',
-                    EC: 0,
-                    DT: ''
+                    EM: 'ok', // Error Message
+                    EC: 0, // Error Code
+                    DT: { // Data
+                        access_token: token,
+                        groupWithRoles
+                    }
                 }
             }
         }

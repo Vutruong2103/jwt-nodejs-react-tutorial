@@ -5,6 +5,8 @@ const handleHelloWord = (req, res) => {
     return res.render("home.ejs");
 }
 const handlUserPage = async (req, res) => {
+    //model => get data from database
+    // Cookies that have not been signed
     let userList = await userService.getUserList()
     //truyen qua views la truyen obj{}
     return res.render("user.ejs", { userList })

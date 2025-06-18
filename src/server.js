@@ -4,8 +4,8 @@ import initApiRouter from "./router/api";
 import confiViewEngine from "./config/viewEngine";
 import bodyParser from "body-parser";
 import configCors from "./config/cors";
+import cookieParser from 'cookie-parser'
 // import connnection from "./config/connectDB";
-import { createJWT, verifyToken } from './middleware/JWTAction'
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -18,15 +18,17 @@ confiViewEngine(app);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//test jwt 
-createJWT();
-let decodedData = verifyToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidnUiLCJhZGRyZXNzIjoiZGFuYW5nIiwiaWF0IjoxNzQ5OTc3MjgzfQ.R52zoKi9PG8Qiayi9H5R8NDBskeLMSXEfWmbdbpiVHI');
-console.log(decodedData);
-
+//config cookie parser
+app.use(cookieParser());
 
 // connnection();
 initWebRoutes(app);
 initApiRouter(app);
+
+//req => middleware => res
+app.use((req, res) =>{
+    return res.send('404 Not Found');
+})
 
 app.listen(PORT, () => {
     console.log("jwt backend is running on the port =" + PORT);

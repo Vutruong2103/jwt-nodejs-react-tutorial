@@ -5,6 +5,8 @@ import userApiService from '../service/userApiService'
 // res: đại diện cho response trả về cho client
 const readFunc = async (req, res) => {
     try {
+        console.log('cookies: ', req.cookies);
+
         if (req.query.page && req.query.limit) {//Chúng được truyền từ (FE) thông qua URL query string khi gọi API
             let page = req.query.page;
             let limit = req.query.limit;
@@ -39,11 +41,11 @@ const createFunc = async (req, res) => {
     try {
         //+1 validate cho nay
         let data = await userApiService.createNewUser(req.body);
-            return res.status(200).json({
-                EM: data.EM,
-                EC: data.EC,
-                DT: data.DT
-            })
+        return res.status(200).json({
+            EM: data.EM,
+            EC: data.EC,
+            DT: data.DT
+        })
     } catch (error) {
         console.log(error);
         return res.status(500).json({
@@ -58,11 +60,11 @@ const updateFunc = async (req, res) => {
     try {
         //+1 validate cho nay
         let data = await userApiService.updateUser(req.body);
-            return res.status(200).json({
-                EM: data.EM,
-                EC: data.EC,
-                DT: data.DT
-            })
+        return res.status(200).json({
+            EM: data.EM,
+            EC: data.EC,
+            DT: data.DT
+        })
     } catch (error) {
         console.log(error);
         return res.status(500).json({
