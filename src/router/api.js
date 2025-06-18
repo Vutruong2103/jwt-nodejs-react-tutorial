@@ -3,11 +3,14 @@ import express from "express";
 import apiController from '../controller/apiController';
 import userController from '../controller/userController';
 import groupController from '../controller/groupController';
+import { checkUserJWT, checkUserPermission } from '../middleware/JWTAction'
 
 const router = express.Router();
 
 //dinh nghia nhung router su dung voi web o trong nay
 const initApiRouter = (app) => {
+
+    router.all('*', checkUserJWT, checkUserPermission); //tất cả các request đều phải có token
     router.post('/register', apiController.handleRegister);
     router.post('/login', apiController.handleLogin);
 
@@ -22,7 +25,7 @@ const initApiRouter = (app) => {
 
     //file chạy ra đầu tiên
     return app.use("/api/v1/", router);
-    
+
 }
 
 export default initApiRouter;

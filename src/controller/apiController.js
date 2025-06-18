@@ -6,7 +6,7 @@ import loginRegisterService from '../service/loginRegisterService';
 const handleLogin = async (req, res) => {
     try {
         let data = await loginRegisterService.handleUserLogin(req.body);
-        res.cookie('userId', data.DT.access_token,{httpOnly: true, maxAge: 24 * 60 * 60 * 1000}); // cookie sẽ hết hạn sau 1 ngày
+        res.cookie('userId', data.DT.access_token, { httpOnly: true, maxAge: 60 * 60 * 1000 }); // cookie sẽ hết hạn sau 1 gio
         return res.status(200).json({
             EM: data.EM,
             EC: data.EC,

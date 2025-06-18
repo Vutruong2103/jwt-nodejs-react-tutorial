@@ -18,7 +18,7 @@ confiViewEngine(app);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//config cookie parser
+//config cookie parser, cài đặt để có thể lấy cookies từ người dùng gửi lên
 app.use(cookieParser());
 
 // connnection();
